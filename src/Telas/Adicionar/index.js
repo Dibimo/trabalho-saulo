@@ -1,12 +1,20 @@
 import React from 'react';
-import { StatusBar, Text, View, TouchableOpacity } from 'react-native';
+import { StatusBar, Text, View, TextInput,   } from 'react-native';
 import  Botao  from '../../componentes/Botao'
+import estilo from './estilo';
 export default function Adicionar() {
+    const [texto, setTexto] = React.useState('');
+    
     return (
         <View>
         <StatusBar />
-            <Text>Isso é um texto de teste</Text>
-            <Botao valor="+ Nota" acao={()=>{alert(1)}}></Botao>
+            <TextInput 
+            style={estilo.input} 
+            multiline={true} 
+            value={texto}
+            onChangeText={text => setTexto(text)}
+            />
+            <Botao valor="+ Nota" acao={()=>{alert(texto)}}></Botao>
         </View>
     );
 }
