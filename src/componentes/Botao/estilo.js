@@ -7,11 +7,12 @@ export default StyleSheet.create({
     },
     botao:{
         width: '70%',
-        height: '39%',
+        height: '100%',
         backgroundColor: "#282a36",
         display: "flex",
         alignContent: "center",
-        justifyContent: "center"
+        justifyContent: "center",
+        borderRadius: 5
     },
     valor: {
         fontWeight: 'bold',
