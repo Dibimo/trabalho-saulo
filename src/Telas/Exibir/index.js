@@ -3,15 +3,60 @@ import { StatusBar, Text, View, TextInput, FlatList, TouchableOpacity, Picker, S
 import Botao from '../../componentes/Botao';
 import CardNota from '../../componentes/CardNota';
 import estilo from './estilo'
+import { useEffect } from 'react';
 
-export default function Exibir({ route, navigation }) {
+export default function Exibir({ route }) {
+
+    useEffect(()=>{
+        const { novaNota } = route.params;
+        addNota();
+        console.log(novaNota);
+    },[route.params]);
+
+    const [categoriaFiltro, setCategoriaFiltro] = React.useState('');
+    const {teste} = route.params;
+    const {novaNota} = route.params;
+    const { vetorNotasNovo } = route.params;
     
-    const { vetorNotas } = route.params;
+    const [vetorNotas, setVetorNotas] = useState([]);
 
+    const addNota = () => {
+        var novoArrayNotas = [...vetorNotas, novaNota];
+        console.log(novoArrayNotas);
+        setVetorNotas(novoArrayNotas);
+    };
+
+    const removeNota = notaId => {
+        setVetorNotas(vetorNotas => {
+            return vetorNotas.filter(nota => nota.id !== notaId);
+        });
+    };
+    // console.log(novaNota);
     // Código "HTML"
     return (
         <View>
-            <FlatList data={vetorNotas}
+            
+            <Picker
+                selectedValue={categoriaFiltro}
+                onValueChange={(itemValue, itemIndex) => {
+                    setCategoriaFiltro(itemValue);
+                }}
+            // style={estilo.input}
+            >
+                <Picker.Item label="-" value=""></Picker.Item>
+                <Picker.Item label="Geral" value="Geral"></Picker.Item>
+                <Picker.Item label="Trabalho" value="Trabalho"></Picker.Item>
+                <Picker.Item label="Estudos" value="Estudos"></Picker.Item>
+                <Picker.Item label="Cotidiano" value="Cotidiano"></Picker.Item>
+                <Picker.Item label="Casa" value="Casa"></Picker.Item>
+                <Picker.Item label="Familia" value="Familia"></Picker.Item>
+            </Picker>
+            <FlatList data={vetorNotas.filter(nota => {
+                if (categoriaFiltro !== "") { //se houve filtro
+                    return nota.categoria == categoriaFiltro; //retorna apenas as notas que tenham o filtro correspondente
+                }
+                return nota; //se não tiver filtro, retorna todas as notas
+            })}
                 renderItem={({ item }) => (
                     <TouchableOpacity style={estilo.listaDeNotas}>
                         {/* <Text onPress={() => { removeNota(item.id) }}>Deletar</Text> */}

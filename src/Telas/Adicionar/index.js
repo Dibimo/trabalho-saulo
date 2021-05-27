@@ -4,7 +4,7 @@ import  Botao  from '../../componentes/Botao';
 import  CardNota  from '../../componentes/CardNota';
 import Item from './Item'
 import estilo from './estilo';
-
+import { StackActions } from '@react-navigation/routers';
 // import { NavigationContainer } from '@react-navigation/native';
 // import { createStackNavigator } from '@react-navigation/stack';
 
@@ -13,7 +13,8 @@ export default function Adicionar({navigation}) {
     // Estados
     const [texto, setTexto] = React.useState('');
     const [titulo, setTitulo] = React.useState('');
-    const [idAtual, setIdAtual] = React.useState(1);
+    const [idAtual, setIdAtual] = React.useState(0);
+
     const [categoriaSelecionada, setCategoriaSelecionada] = React.useState('Geral');
     const [categoriaFiltro, setCategoriaFiltro] = React.useState('');
     
@@ -97,11 +98,15 @@ export default function Adicionar({navigation}) {
             </Picker>
             <Botao valor="+ Nota" acao={() => {
                 addNota();
+                
             }}></Botao>
             
             <Botao valor="Teste" acao={() => {
-                navigation.navigate('Exibir',{vetorNotas: vetorNotas});
+                navigation.navigate('Exibir', { novaNota: constroiNota() });
+                navigation.navigate('Exibir', { vetorNotasNovo: vetorNotas });
+                navigation.navigate('Exibir', { teste: texto });
             }}></Botao>
+
             <FlatList data={vetorNotas.filter(nota => {
                 if(categoriaFiltro !==""){ //se houve filtro
                     return nota.categoria == categoriaFiltro; //retorna apenas as notas que tenham o filtro correspondente
