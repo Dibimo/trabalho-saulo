@@ -2,7 +2,10 @@ import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
     nota:{
-        border: "1px solid black",
-        marginBottom: 2
+
+        borderWidth: 1,
+        borderColor: "#000",
+        marginBottom: 2,
+        width: '75%'
     }
 });

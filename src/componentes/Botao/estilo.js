@@ -2,17 +2,21 @@ import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
     conteiner:{
+        // flex:1,
         display: "flex",
-        alignItems: "center"
+        alignItems: "center",
+        // height: '25%',
     },
     botao:{
-        width: '70%',
-        height: '100%',
+        paddingHorizontal: '24%',
+        margin: '3%',
+        color: "#fff",
         backgroundColor: "#282a36",
         display: "flex",
         alignContent: "center",
         justifyContent: "center",
-        borderRadius: 5
+        flexWrap: 'wrap',
+        borderRadius: 5,
     },
     valor: {
         fontWeight: 'bold',

@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
-import { StatusBar, Text, View, TextInput, FlatList, TouchableOpacity, Picker  } from 'react-native';
+import { StatusBar, Text, View, TextInput, FlatList, TouchableOpacity, Picker, ScrollView  } from 'react-native';
 import  Botao  from '../../componentes/Botao';
 import  CardNota  from '../../componentes/CardNota';
 import Item from './Item'
 import estilo from './estilo';
-export default function Adicionar() {
+
+// import { NavigationContainer } from '@react-navigation/native';
+// import { createStackNavigator } from '@react-navigation/stack';
+
+
+export default function Adicionar({navigation}) {
     // Estados
     const [texto, setTexto] = React.useState('');
     const [titulo, setTitulo] = React.useState('');
@@ -46,14 +51,14 @@ export default function Adicionar() {
         <StatusBar />
             <View>
                 <TextInput 
-                    style={estilo.input} 
+                    // style={estilo.input} 
                     multiline={true} 
                     value={titulo}
                     onChangeText={titulo => setTitulo(titulo)}
                     placeholder={'Titulo'}
                 />
                 <TextInput 
-                    style={estilo.input} 
+                    // style={estilo.input} 
                     multiline={true} 
                     value={texto}
                     onChangeText={text => setTexto(text)}
@@ -62,6 +67,7 @@ export default function Adicionar() {
                 <Picker
                     selectedValue={categoriaSelecionada}
                     onValueChange={(itemValue, itemIndex)=> setCategoriaSelecionada(itemValue)}
+                    // style={estilo.input}
                 >
                     <Picker.Item label="Geral" value="Geral"></Picker.Item>
                     <Picker.Item label="Trabalho" value="Trabalho"></Picker.Item>
@@ -71,16 +77,15 @@ export default function Adicionar() {
                     <Picker.Item label="Familia" value="Familia"></Picker.Item>
                 </Picker>
             </View>
-            <View>
-                <Botao valor="+ Nota" acao={()=>{
-                    addNota();
-                }}></Botao>
-            </View>
+            
+            
+            
             <Picker
                 selectedValue={categoriaFiltro}
                 onValueChange={(itemValue, itemIndex) => {
                     setCategoriaFiltro(itemValue);
                 }}
+                // style={estilo.input}
             >
                 <Picker.Item label="-" value=""></Picker.Item>
                 <Picker.Item label="Geral" value="Geral"></Picker.Item>
@@ -90,7 +95,13 @@ export default function Adicionar() {
                 <Picker.Item label="Casa" value="Casa"></Picker.Item>
                 <Picker.Item label="Familia" value="Familia"></Picker.Item>
             </Picker>
-
+            <Botao valor="+ Nota" acao={() => {
+                addNota();
+            }}></Botao>
+            
+            <Botao valor="Teste" acao={() => {
+                navigation.navigate('Exibir',{vetorNotas: vetorNotas});
+            }}></Botao>
             <FlatList data={vetorNotas.filter(nota => {
                 if(categoriaFiltro !==""){ //se houve filtro
                     return nota.categoria == categoriaFiltro; //retorna apenas as notas que tenham o filtro correspondente
@@ -98,7 +109,7 @@ export default function Adicionar() {
                 return nota; //se não tiver filtro, retorna todas as notas
             })}
                 renderItem={({ item }) => (
-                    <TouchableOpacity >
+                    <TouchableOpacity style={estilo.listaDeNotas}>
                         {/* <Text onPress={() => { removeNota(item.id) }}>Deletar</Text> */}
                         {/* <Item {...item} acao={() => { removeNota(item.id) }} /> */}
                         <CardNota 
@@ -112,6 +123,7 @@ export default function Adicionar() {
                 )
             }
                 keyExtractor={({ id }) => String(id)}
+                
             />
         </View>
     );
