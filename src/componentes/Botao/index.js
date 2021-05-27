@@ -5,8 +5,8 @@ import estilo from './estilo';
 export default function Botao({ valor, acao }) {
     return (
         <View style={estilo.conteiner}>
-            <TouchableOpacity onPress={acao} >
-                <Text style={estilo.botao}>{valor}</Text>
+            <TouchableOpacity onPress={acao} style={estilo.botao}>
+                <Text style={estilo.texto}>{valor}</Text>
             </TouchableOpacity>
         </View>
     );

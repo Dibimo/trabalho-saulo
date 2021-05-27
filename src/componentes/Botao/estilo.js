@@ -8,20 +8,20 @@ export default StyleSheet.create({
         // height: '25%',
     },
     botao:{
-        paddingHorizontal: '24%',
-        margin: '3%',
+        paddingHorizontal: '39.5%',
+        height: '25%',
+        marginVertical: '6%',
         color: "#fff",
-        backgroundColor: "#282a36",
+        backgroundColor: "#2b7ad4",
         display: "flex",
-        alignContent: "center",
+        alignItems: "center",
+        textAlign: "center",
         justifyContent: "center",
         flexWrap: 'wrap',
         borderRadius: 5,
     },
-    valor: {
-        fontWeight: 'bold',
-        textAlign: 'center',
+    texto: {
+        fontSize: 12,
         color: "#fff",
-        fontSize: 20
     }
 });
