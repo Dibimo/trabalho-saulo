@@ -13,7 +13,7 @@ export default function Rotas() {
         <NavigationContainer>
             <Tab.Navigator>
                 <Tab.Screen name="Adicionar" component={Adicionar} />
-                <Tab.Screen name="Exibir" component={Exibir} />
+                <Tab.Screen name="Exibir" component={Exibir} initialParams={{novaNota: {}}} />
             </Tab.Navigator>
         </NavigationContainer>
     );

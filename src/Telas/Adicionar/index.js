@@ -4,24 +4,24 @@ import  Botao  from '../../componentes/Botao';
 import  CardNota  from '../../componentes/CardNota';
 import Item from './Item'
 import estilo from './estilo';
-import { StackActions } from '@react-navigation/routers';
+import { useEffect } from 'react';
 // import { NavigationContainer } from '@react-navigation/native';
 // import { createStackNavigator } from '@react-navigation/stack';
 
 
 export default function Adicionar({navigation}) {
     // Estados
+    
     const [texto, setTexto] = React.useState('');
     const [titulo, setTitulo] = React.useState('');
     const [idAtual, setIdAtual] = React.useState(0);
-
+    
     const [categoriaSelecionada, setCategoriaSelecionada] = React.useState('Geral');
     const [categoriaFiltro, setCategoriaFiltro] = React.useState('');
     
     // Estados -> Vetores
     const [vetorNotas, setVetorNotas] = useState([]);
     
-
     // Funções
     const constroiNota = ()=>{
         let tituloNota = titulo;

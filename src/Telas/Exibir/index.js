@@ -7,23 +7,21 @@ import { useEffect } from 'react';
 
 export default function Exibir({ route }) {
 
-    useEffect(()=>{
-        const { novaNota } = route.params;
-        addNota();
-        console.log(novaNota);
-    },[route.params]);
-
-    const [categoriaFiltro, setCategoriaFiltro] = React.useState('');
-    const {teste} = route.params;
-    const {novaNota} = route.params;
-    const { vetorNotasNovo } = route.params;
     
+    useEffect(()=>{
+        addNota();
+    },[route.params.novaNota]);
+    
+    const { novaNota } = route.params;
+    
+    const [categoriaFiltro, setCategoriaFiltro] = React.useState('');
     const [vetorNotas, setVetorNotas] = useState([]);
-
     const addNota = () => {
-        var novoArrayNotas = [...vetorNotas, novaNota];
-        console.log(novoArrayNotas);
-        setVetorNotas(novoArrayNotas);
+        if (Object.keys(novaNota).length !== 0) {
+            var novoArrayNotas = [...vetorNotas, novaNota];
+            console.log(novoArrayNotas);
+            setVetorNotas(novoArrayNotas);
+        }
     };
 
     const removeNota = notaId => {
@@ -31,8 +29,6 @@ export default function Exibir({ route }) {
             return vetorNotas.filter(nota => nota.id !== notaId);
         });
     };
-    // console.log(novaNota);
-    // Código "HTML"
     return (
         <View>
             
