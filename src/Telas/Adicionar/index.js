@@ -16,12 +16,7 @@ export default function Adicionar({navigation}) {
     const [titulo, setTitulo] = React.useState('');
     const [idAtual, setIdAtual] = React.useState(0);
     
-    const [categoriaSelecionada, setCategoriaSelecionada] = React.useState('Geral');
-    const [categoriaFiltro, setCategoriaFiltro] = React.useState('');
-    
-    // Estados -> Vetores
-    const [vetorNotas, setVetorNotas] = useState([]);
-    
+    const [categoriaSelecionada, setCategoriaSelecionada] = React.useState('Geral');    
     // Funções
     const constroiNota = ()=>{
         let tituloNota = titulo;
@@ -35,15 +30,6 @@ export default function Adicionar({navigation}) {
             texto: textoNota, 
             categoria: categoriaNota
         }
-    }
-    const addNota = () =>{
-        var novoArrayNotas = [...vetorNotas, constroiNota()];
-        setVetorNotas(novoArrayNotas);
-    };
-    const removeNota = notaId => {
-        setVetorNotas(vetorNotas => {
-            return vetorNotas.filter(nota => nota.id !== notaId);
-        });
     };
 
     // Código "HTML"
@@ -78,58 +64,11 @@ export default function Adicionar({navigation}) {
                     <Picker.Item label="Familia" value="Familia"></Picker.Item>
                 </Picker>
             </View>
-            
-            
-            
-            <Picker
-                selectedValue={categoriaFiltro}
-                onValueChange={(itemValue, itemIndex) => {
-                    setCategoriaFiltro(itemValue);
-                }}
-                // style={estilo.input}
-            >
-                <Picker.Item label="-" value=""></Picker.Item>
-                <Picker.Item label="Geral" value="Geral"></Picker.Item>
-                <Picker.Item label="Trabalho" value="Trabalho"></Picker.Item>
-                <Picker.Item label="Estudos" value="Estudos"></Picker.Item>
-                <Picker.Item label="Cotidiano" value="Cotidiano"></Picker.Item>
-                <Picker.Item label="Casa" value="Casa"></Picker.Item>
-                <Picker.Item label="Familia" value="Familia"></Picker.Item>
-            </Picker>
             <Botao valor="+ Nota" acao={() => {
-                addNota();
-                
-            }}></Botao>
-            
-            <Botao valor="Teste" acao={() => {
                 navigation.navigate('Exibir', { novaNota: constroiNota() });
-                navigation.navigate('Exibir', { vetorNotasNovo: vetorNotas });
-                navigation.navigate('Exibir', { teste: texto });
             }}></Botao>
 
-            <FlatList data={vetorNotas.filter(nota => {
-                if(categoriaFiltro !==""){ //se houve filtro
-                    return nota.categoria == categoriaFiltro; //retorna apenas as notas que tenham o filtro correspondente
-                }
-                return nota; //se não tiver filtro, retorna todas as notas
-            })}
-                renderItem={({ item }) => (
-                    <TouchableOpacity style={estilo.listaDeNotas}>
-                        {/* <Text onPress={() => { removeNota(item.id) }}>Deletar</Text> */}
-                        {/* <Item {...item} acao={() => { removeNota(item.id) }} /> */}
-                        <CardNota 
-                            titulo={item.titulo} 
-                            texto={item.texto} 
-                            categoria={item.categoria}
-                            acao={()=>{ removeNota(item.id) }}
-                        >
-                        </CardNota>
-                    </TouchableOpacity>
-                )
-            }
-                keyExtractor={({ id }) => String(id)}
-                
-            />
+            
         </View>
     );
 }
