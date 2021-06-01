@@ -30,7 +30,7 @@ export default function Exibir({ route }) {
         });
     };
     return (
-        <View>
+        <View style={estilo.bodyExibir}>
             
             <Picker
                 selectedValue={categoriaFiltro}
