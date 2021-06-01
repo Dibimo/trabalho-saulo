@@ -1,15 +1,21 @@
 import React, { useState } from 'react';
-import { StatusBar, Text, View, TextInput, FlatList, TouchableOpacity, Picker, ScrollView, AsyncStorage,  } from 'react-native';
+import { StatusBar, Text, View, TextInput, FlatList, TouchableOpacity, Picker, Image, AsyncStorage,  } from 'react-native';
 import  Botao  from '../../componentes/Botao';
-import  CardNota  from '../../componentes/CardNota';
-import Item from './Item'
 import estilo from './estilo';
-import { useEffect } from 'react';
+
+// import {
+//     useFonts,
+//     IndieFlower_400Regular,
+// } from '@expo-google-fonts/indie-flower/index';
+
 // import { NavigationContainer } from '@react-navigation/native';
 // import { createStackNavigator } from '@react-navigation/stack';
 
 
 export default function Adicionar({navigation}) {
+    
+    
+
     // Estados
     
     // const salvar = async() => {
@@ -62,14 +68,18 @@ export default function Adicionar({navigation}) {
         }
     };
 
+    var logo = require('../../../assets/LittleNotesLogo.png');
     // Código "HTML"
     return (
         <View style={estilo.body}>
+        <View style={estilo.littleLogoConteiner} >
+            <Image style={estilo.littleLogo} source={logo} />
+        </View>
         <StatusBar />
             <View>
                 <View>
                     <TextInput 
-                        style={estilo.input} 
+                        style={estilo.input}
                         multiline={true} 
                         value={titulo}
                         onChangeText={titulo => setTitulo(titulo)}
