@@ -1,6 +1,4 @@
 import { StyleSheet } from 'react-native';
-// import { useFonts } from '@expo-google-fonts/indie-flower';
-
 
 export default StyleSheet.create({
     
@@ -22,7 +20,7 @@ export default StyleSheet.create({
         height: "100%"
     },
     input: {
-        fontFamily: 'flower',
+        // fontFamily: "flower",
         margin: 12,
     },
     listaDeNotas:{

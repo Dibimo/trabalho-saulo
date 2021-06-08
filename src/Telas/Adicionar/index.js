@@ -2,49 +2,36 @@ import React, { useState } from 'react';
 import { StatusBar, Text, View, TextInput, FlatList, TouchableOpacity, Picker, Image, AsyncStorage,  } from 'react-native';
 import  Botao  from '../../componentes/Botao';
 import estilo from './estilo';
-
-// import {
-//     useFonts,
-//     IndieFlower_400Regular,
-// } from '@expo-google-fonts/indie-flower/index';
-
-// import { NavigationContainer } from '@react-navigation/native';
-// import { createStackNavigator } from '@react-navigation/stack';
+import { useFonts } from 'expo-font';
+import CardNota from '../../componentes/CardNota';
+import * as Font from 'expo-font';
+import { useEffect } from 'react';
 
 
 export default function Adicionar({navigation}) {
+
+    const carregarFonte = async () => {
+        try {
+            await Font.loadAsync({
+                flower: require('../../../assets/fonts/IndieFlower-Regular.ttf'),
+            });
+        } catch (err) {
+            return;
+        }
+
+        setEstiloInput({
+            fontFamily: "flower",
+            margin: 12,
+        });
+    }
+
+    
+    const [estiloInput, setEstiloInput] = useState({});
+    
+
+    useEffect(() => { carregarFonte() }, [])
     
     
-
-    // Estados
-    
-    // const salvar = async() => {
-    //     try{
-    //         console.log('foi');
-    //         await AsyncStorage.setItem('teste', texto);
-    //     }catch(err){
-    //         alert(err)
-    //     }
-    // }
-
-    // const load = async () =>{
-    //     try {
-    //         let textoSalvo = await AsyncStorage.getItem('teste');
-    //         setTitulo( textoSalvo)
-    //     } catch (err) {
-    //         alert(err)
-    //     }
-    // }
-
-    // useEffect(()=>{
-    //     load()
-    // },[]);
-    // <View>
-    //     <TouchableOpacity onPress={salvar}><Text>salvar</Text></TouchableOpacity>
-    // </View>
-
-   
-
     const [texto, setTexto] = React.useState('');
     const [titulo, setTitulo] = React.useState('');
     const [idAtual, setIdAtual] = React.useState(0);
@@ -78,15 +65,17 @@ export default function Adicionar({navigation}) {
         <StatusBar />
             <View>
                 <View>
+                    <View>
+                    </View>
                     <TextInput 
-                        style={estilo.input}
+                        style={estiloInput}
                         multiline={true} 
                         value={titulo}
                         onChangeText={titulo => setTitulo(titulo)}
                         placeholder={'Titulo'}
                     />
                     <TextInput 
-                        style={estilo.input} 
+                        style={estiloInput} 
                         multiline={true} 
                         value={texto}
                         onChangeText={text => setTexto(text)}
@@ -97,9 +86,9 @@ export default function Adicionar({navigation}) {
                 <Picker
                     selectedValue={categoriaSelecionada}
                     onValueChange={(itemValue, itemIndex) => setCategoriaSelecionada(itemValue)}
-                    // style={estilo.input}
+                    style={estiloInput}
                 >
-                    <Picker.Item label="Categoria" value="Geral"></Picker.Item>
+                    <Picker.Item label="Categoria" value="Categoria"></Picker.Item>
                     <Picker.Item label="Geral" value="Geral"></Picker.Item>
                     <Picker.Item label="Trabalho" value="Trabalho"></Picker.Item>
                     <Picker.Item label="Estudos" value="Estudos"></Picker.Item>
